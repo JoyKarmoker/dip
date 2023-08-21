@@ -1,0 +1,42 @@
+import numpy as np
+# a = np.arange(1, 5)
+# print(a)
+# b = np.arange(9, 5, -1)
+# print(b)
+# c = np.concatenate((a,b))
+# print(c)
+
+# x = np.arange(1, 5).reshape(2,2)
+# print(x)
+# y = np.arange(9, 5, -1).reshape(2,2)
+# print(y)
+# z = np.concatenate((x, y))
+# print()
+# print(z)
+# print(z.shape)
+# z = np.concatenate((x, y), axis=1)
+# print()
+# print(z)
+# print(z.shape)
+
+var = np.arange(1, 7)
+print(var)
+print()
+
+ar = np.array_split(var, 3)
+print(ar)
+print(type(ar))
+print(ar[0])
+print()
+
+var1 = np.arange(1, 7).reshape(3,2)
+print(var1)
+print()
+
+ar = np.array_split(var1, 3)
+print(ar)
+print(type(ar))
+print(ar[0])
+
+ar = np.array_split(var1, 3, axis=1)
+print(ar)
