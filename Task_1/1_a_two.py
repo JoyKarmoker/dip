@@ -1,48 +1,47 @@
 import cv2
-import matplotlib.pyplot as plt
 import numpy as np
+import matplotlib.pyplot as plt
 
-# Read the original image
-img1 = cv2.imread('monalisa.png', 0)
 
-# Obtain the size of the original image
+img1 = cv2.imread('cat.jpg', 0)
 [m, n] = img1.shape
 print('Image Shape:', m, n)
+# cv2.imshow('window_name', img1)
+# cv2.waitKey(0)
 
-# Create a window for displaying images
-cv2.namedWindow('Downsampling', cv2.WINDOW_NORMAL)
-cv2.resizeWindow('Downsampling', 512, 512)
 
 # Initialize the down-sampling rate
 f = 2
+sampled_image = []
 
-while True:
-    # Show the original image
-    print('Original Image:')
-    plt.imshow(img1, cmap="gray")
-    plt.show()
+for k in range(8):
+    # Downsample the imageq
+    img2 = np.zeros((m // f, n // f), dtype=np.uint8)
 
-    # Show the downsampled image
-    print('Down Sampled Image:')
-    img2 = np.zeros((m // f, n // f), dtype=int)
-    for i in range(0, m, f):
-        for j in range(0, n, f):
-            try:
-                img2[i // f][j // f] = img1[i][j]
-            except IndexError:
-                pass
-    plt.imshow(img2, cmap="gray")
-    plt.show()
+    if img2.shape[0] > 0 and img2.shape[1] > 0:  # Check for valid index
+        for i in range(0, m, f):
+            for j in range(0, n, f):
+                try:
+                    img2[i // f][j // f] = img1[i][j]
+                except IndexError:
+                    pass
 
-    # Wait for a key press
-    key = cv2.waitKey(0)
-
-    # Check if the 'q' key (quit) is pressed
-    if key == ord('q') or key == 27:  # 'q' key or ESC key
-        break
+        sampled_image.append(img2)
 
     # Increase the down-sampling rate when any other key is pressed
     f *= 2
 
-# Close the OpenCV window
-cv2.destroyAllWindows()
+row, col = 2, 4
+fig, ax = plt.subplots(row, col, figsize=(9, 7))
+idx = 0
+for i in range(row):
+    for j in range(col):
+        ax[i, j].imshow(sampled_image[idx], cmap='gray')
+        h = sampled_image[idx].shape[0]
+        w = sampled_image[idx].shape[1]
+        ax[i, j].set_title(f'{h}x{w}')
+        idx+=1
+
+plt.tight_layout()
+plt.show()
+
