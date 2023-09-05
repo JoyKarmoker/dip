@@ -1,0 +1,1 @@
+    transformed_image = transformed_image/255.0

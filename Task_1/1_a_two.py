@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-img1 = cv2.imread('cat.jpg', 0)
+img1 = cv2.imread('lena.jpg', 0)
 [m, n] = img1.shape
 print('Image Shape:', m, n)
 # cv2.imshow('window_name', img1)
