@@ -19,7 +19,9 @@ def brightness_enhancement(gray_image, factor, low, high):
 
 image = plt.imread('skull.jpg')
 gray_image = convert_to_gray(image)
-factor, low, high = 50, 105, 200
+low = int(input("Give The Lowest intensity of the range of enhancement: "))
+high = int(input("Give The Highest intensity of the range of enhancement: "))
+factor = int(input("Give the factor by which the pixels of the range should be enhanced: "))
 enhanced_image = brightness_enhancement(gray_image, factor, low, high)
 
 fig, ax = plt.subplots(1,2, figsize=(8, 7))

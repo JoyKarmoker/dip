@@ -25,14 +25,13 @@ def inverse_log(image):
     inverse_log_image = inverse_log_image/255.0
     r = np.arange(0, 256)
     c = 255.0 / np.log(1 + 255)
-
+    # c = 1
     # for inverse log operation
     y = (np.exp(r) ** (1/c)) - 1
     [height, width] = inverse_log_image.shape
     for i in range(height):
         for j in range(width):
             inverse_log_image[i][j] = np.exp(inverse_log_image[i][j]*255) ** (1/c) - 1
-    
 
     return inverse_log_image, y, r
 
@@ -54,13 +53,13 @@ plt.plot(f_range, f_value)
 plt.title(f'Transfer Function(power-{power})')
 plt.subplot(3, 2, 4)
 plt.imshow(power_law_image, cmap='gray')
-plt.title('Transformed')
+plt.title(f'power-{power} Transformed')
 plt.subplot(3, 2, 5)
 plt.plot(log_f_range, log_f_value)
 plt.title('Transfer Function(inverse-log)')
 plt.subplot(3, 2, 6)
 plt.imshow(log_image, cmap='gray')
-plt.title('Transformed')
+plt.title(f'Inverse Log Transformed')
 
 plt.tight_layout()
 plt.show()

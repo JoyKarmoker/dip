@@ -1,30 +1,20 @@
 import cv2
 import numpy as np
+import matplotlib.pyplot as plt
 
 
-img1 = cv2.imread('monalisa.png', 0)
-
+img1 = cv2.imread('lena.jpg', 0)
 [m, n] = img1.shape
 print('Image Shape:', m, n)
-
-cv2.namedWindow('Downsampling', cv2.WINDOW_NORMAL)
-cv2.resizeWindow('Downsampling', 512, 512)
-
-
-print('Original Image:')
-cv2.imshow('Downsampling', img1)
+# cv2.imshow('window_name', img1)
+# cv2.waitKey(0)
 
 
 # Initialize the down-sampling rate
 f = 2
+sampled_image = []
 
-while True:
-    # Wait for a key press
-    key = cv2.waitKey(0)
-
-    if key == ord('q') or key == 27:  # 'q' key or ESC key
-        break
-
+for k in range(8):
     # Downsample the imageq
     img2 = np.zeros((m // f, n // f), dtype=np.uint8)
 
@@ -36,11 +26,22 @@ while True:
                 except IndexError:
                     pass
 
-        #print('Down Sampled Image:')
-        cv2.imshow('Downsampling', img2)
+        sampled_image.append(img2)
 
     # Increase the down-sampling rate when any other key is pressed
     f *= 2
 
+row, col = 2, 4
+fig, ax = plt.subplots(row, col, figsize=(9, 7))
+idx = 0
+for i in range(row):
+    for j in range(col):
+        ax[i, j].imshow(sampled_image[idx], cmap='gray')
+        h = sampled_image[idx].shape[0]
+        w = sampled_image[idx].shape[1]
+        ax[i, j].set_title(f'{h}x{w}')
+        idx+=1
 
-cv2.destroyAllWindows()
+plt.tight_layout()
+plt.show()
+

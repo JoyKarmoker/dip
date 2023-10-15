@@ -31,4 +31,3 @@ for i in range(row):
 plt.tight_layout()
 plt.show()
 
-
