@@ -20,7 +20,7 @@ def add_salt_peper_noise(image, noise_percentage):
     for i in range(noise_pixels):
         random_row_in_original_image = random.randint(0, row - 1)
         random_col_in_original_image = random.randint(0, column - 1)
-        noisy_image[random_row_in_original_image][random_col_in_original_image] = random.randint(0, 255)
+        noisy_image[random_row_in_original_image][random_col_in_original_image] = random.choice([0, 255])
     return noisy_image
 
 
@@ -79,7 +79,7 @@ def cal_psnr(original_image, noisy_image):
 
 rgb_image = plt.imread('skull.jpg')
 gray_image = convert_to_gray(rgb_image)
-noise_percentage = 2
+noise_percentage = 1
 noisy_image = add_salt_peper_noise(gray_image, noise_percentage)
 noise_psnr = cal_psnr(gray_image, noisy_image)
 kernel_size = 3
