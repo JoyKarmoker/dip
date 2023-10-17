@@ -53,7 +53,7 @@ def cal_psnr(original_image, noisy_image):
     return psnr
 
 
-rgb_image = plt.imread('G:\Study\\4th Year 1st Semester\Digital Image Processing\Lab\Task_3\moon.jpg')
+rgb_image = plt.imread('einstein.jpeg')
 gray_image = convert_to_gray(rgb_image)
 noise_percentage = 17
 noisy_image = add_salt_peper_noise(gray_image, noise_percentage)
