@@ -45,8 +45,10 @@ def harmonic_mean_filter(noisy_image, kernel_size):
                 harmonic_mean = (kernel_size * kernel_size) / np.sum(reciprocal_window)
                 # Set the filtered pixel value to the harmonic mean.
                 filtered_image[i][j] = harmonic_mean
+                # print("if")
             else:
                 # If there is a divide-by-zero error, set the filtered pixel value to 0.
+                # print("else")
                 filtered_image[i][j] = 0
     return filtered_image
 
