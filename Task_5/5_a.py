@@ -4,25 +4,27 @@ import cv2
 
 def perform_erosion(image, structuring_element_size):
     row, cols = image.shape
+    kernel = np.ones((structuring_element_size, structuring_element_size), np.uint8)
     eroded_image = np.zeros(image.shape)
 
     for i in range(structuring_element_size//2, row-structuring_element_size//2):
         for j in range(structuring_element_size//2, cols-structuring_element_size//2):
             region = image[i-structuring_element_size//2:i+structuring_element_size//2+1,
                      j-structuring_element_size//2:j+structuring_element_size//2+1]
-            eroded_image[i, j] = np.min(region)
+            eroded_image[i, j] = np.min(region*kernel)
 
     return eroded_image
 
 def perform_dilation(image, structuring_element_size):
     row, cols = image.shape
+    kernel = np.ones((structuring_element_size, structuring_element_size), np.uint8)
     eroded_image = np.zeros(image.shape)
 
     for i in range(structuring_element_size//2, row-structuring_element_size//2):
         for j in range(structuring_element_size//2, cols-structuring_element_size//2):
             region = image[i-structuring_element_size//2:i+structuring_element_size//2+1,
                      j-structuring_element_size//2:j+structuring_element_size//2+1]
-            eroded_image[i, j] = np.max(region)
+            eroded_image[i, j] = np.max(region*kernel)
 
     return eroded_image
 
